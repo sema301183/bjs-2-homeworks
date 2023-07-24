@@ -1,19 +1,22 @@
-'use strict'
-
+"use strict";
 function solveEquation(a, b, c) {
   let arr = [];
-  let x1;
-  let x2;
-  // код для задачи №1 писать здесь
-  let d = b ** 2 - 4 * a * c;
-  if (d < 0) {
-    arr = [];
-  } else if (d === 0) {
-    arr = [(-b + Math.sqrt(d)) / (2 * a)];
-  } else {
-    x1 = (-b + Math.sqrt(d)) / (2 * a);
-    x2 = (-b - Math.sqrt(d)) / (2 * a);
-    arr.push(x1, x2);
+  let d = (b ** 2 - 4 * a * c);
+  if (d > 0) {
+    let root1 = (-b + Math.sqrt(d)) / (2 * a);
+    let root2 = (-b - Math.sqrt(d)) / (2 * a);
+    arr.push(root1, root2);
+    console.log(arr);
+    return arr;
+  }
+  if (d === 0) {
+    let root0 = -b / (2 * a);
+    arr.push(root0);
+    console.log(arr);
+    return arr;
+  }
+  else {
+    console.log("корней нет" + arr)
   }
   return arr; // array
 }
@@ -31,7 +34,7 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
   } else {
 
     let today = new Date();
-    if (today.getFullYear() > date.getFullYear()) {
+    if (today.getFullYear() > date.getFullYear() || today.getMonth() > date.getMonth()) {
       return `Параметр "срок ипотеки" содержит неправильное значение ${date}`;
     } else {
       let s = am - con;						  //тело кредита
@@ -43,8 +46,4 @@ function calculateTotalMortgage(percent, contribution, amount, date) {
     }
   }
 
-  // код для задачи №2 писать здесь
-
-
-  return +totalAmount;
 }
