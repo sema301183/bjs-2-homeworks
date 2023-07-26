@@ -1,49 +1,31 @@
-"use strict";
+"use strict"
 function solveEquation(a, b, c) {
+  "use strict";
   let arr = [];
-  let d = (b ** 2 - 4 * a * c);
+  let x;
+  const d = Math.pow(b, 2) - 4 * a * c;
   if (d > 0) {
-    let root1 = (-b + Math.sqrt(d)) / (2 * a);
-    let root2 = (-b - Math.sqrt(d)) / (2 * a);
-    arr.push(root1, root2);
-    console.log(arr);
-    return arr;
+    x = (-b + Math.sqrt(d)) / (2 * a);
+    arr.push(x);
+    x = (-b - Math.sqrt(d)) / (2 * a);
+    arr.push(x);
+  } else if (d === 0) {
+    x = -b / (2 * a);
+    arr.push(x);
   }
-  if (d === 0) {
-    let root0 = -b / (2 * a);
-    arr.push(root0);
-    console.log(arr);
-    return arr;
-  }
-  else {
-    console.log("корней нет" + arr)
-  }
-  return arr; // array
+  console.log(arr);
+  return arr;
 }
+solveEquation(1, 2, 1)
 
-function calculateTotalMortgage(percent, contribution, amount, date) {
-  let per = parseInt(percent) / 100 / 12; //процентная ставка
-  let con = parseInt(contribution); 	  //начальный взнос	
-  let am = parseInt(amount);  			  //общая стоимость	
-  if (isNaN(per) || per < 0) {
-    return `Параметр "Процентная ставка" содержит неправильное значение "${percent}"`;
-  } else if (isNaN(con) || con < 0) {
-    return `Параметр "Начальный взнос" содержит неправильное значение "${contribution}"`;
-  } else if (isNaN(am) || am < 0) {
-    return `Параметр "Общая стоимость" содержит неправильное значение "${amount}"`;
-  } else {
-
-    let today = new Date();
-    if (today.getFullYear() > date.getFullYear() || today.getMonth() > date.getMonth()) {
-      return `Параметр "срок ипотеки" содержит неправильное значение ${date}`;
-    } else {
-      let s = am - con;						  //тело кредита
-      let n = date.getMonth() - today.getMonth() + (12 * (date.getFullYear() - today.getFullYear())); //срок кредита в месяцах
-      let pay = s * (per + per / (((1 + per) ** n) - 1));			//ежемесячная оплата
-      let totalAmount = (pay * n).toFixed(2);
-      console.log(totalAmount);
-      return +totalAmount;
-    }
-  }
-
+function calculateTotalMortgage(percent, contribution, amount, countMonths) //процент (в диапазоне от 0 до 100), начальный взнос, сумма кредита, срок в месяцах 
+{
+  const P = percent / 100 / 12;
+  const S = amount - contribution;
+  const n = countMonths;
+  const monthlyPayment = S * (P + P / (Math.pow(1 + P, n) - 1));
+  const totalAmount = (monthlyPayment * n).toFixed(2);
+  let num = Number(totalAmount);
+  return num;
 }
+calculateTotalMortgage(10, 0, 50000, 12)
