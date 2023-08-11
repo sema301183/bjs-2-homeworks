@@ -27,13 +27,13 @@ class Triangle {
         this.c = c;
     }
 
-    getArea() {
+    get area() {
         return this.a + this.b + this.c;
     }
 
-    get area() {
+    get perimeter() {
         const p = this.perimeter / 2;
-        return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed (3);
+        return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed;
     }
 }
 
