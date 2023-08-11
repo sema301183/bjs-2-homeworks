@@ -1,6 +1,6 @@
 ﻿function parseCount(item) {
     const value = parseFloat(item);
-    if (isNoN(value)) {
+    if (isNaN(value)) {
         throw new Error("Невалидное значение")
     }
     return value;
@@ -23,17 +23,17 @@ class Triangle {
             throw new Error("Треугольник с такими сторонами не существует")
         }
         this.a = a;
-        this.a = b;
-        this.a = c;
-    }
-
-    getPerimeter() {
-        return this.a + this.b + this.c;
+        this.b = b;
+        this.c = c;
     }
 
     getArea() {
+        return this.a + this.b + this.c;
+    }
+
+    get area() {
         const p = this.perimeter / 2;
-        return +Math.sqrt(x: p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(fractionDgits: 3);
+        return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed;
     }
 }
 
@@ -43,10 +43,10 @@ function getTriangle(a, b, c) {
         return new Triangle(a, b, c);
     } catch (error) {
         return {
-            getArea() {
+            get area() {
                 return "Ошибка! Треугольник не существует";
             },
-            getPerimeter() {
+            get perimeter() {
                 return "Ошибка! Треугольник не существует";
             }
         }
