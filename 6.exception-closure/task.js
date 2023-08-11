@@ -1,52 +1,66 @@
-﻿// task #1
+﻿function parseCount(inputOfUser) {
 
-function parseCount(value) {
-    const number = Number.parseInt(value, 10);
-    if (number) {
-        return number;
-    }
-    throw new Error("Невалидное значение");
-}
+    let parsResult = Number.parseInt(inputOfUser, 10); //преобразование аргумента в десятичное число
+    if (Number.isNaN(parsResult)) throw new Error('Невалидное значение'); // если результат преобразования не является числом
 
-function validateCount(value) {
+    return parsResult; // возврат результата преобразования аргумента
+};
+
+function validateCount(inputOfUser2) {
+
     try {
-        return parseCount(value);
+
+        return parseCount(inputOfUser2) // возврат результата преобразования аргумента
+
     }
     catch (err) {
-        return err;
+        return err; // возврат ошибки из функции
     }
-}
 
-// task #2
+};
 
 class Triangle {
-    constructor(a, b, c) {
-        if (((a + b) < c) || ((a + c) < b) || ((c + b) < a)) {
-            throw new Error('Треугольник с такими сторонами не существует');
-        }
-        this.leftSide = a;
-        this.rightSide = b;
-        this.basicSide = c;
+
+
+    constructor(a, b, c) { // ввод и обработка параметров, сторон треугольника
+        this.a = a;
+        this.b = b;
+        this.c = c;
+
+        if (((a + b) < c) || ((a + c) < b) || ((b + c) < a))
+
+            throw new Error('Треугольник с такими сторонами не существует'); // условие невозможности создать треугольник
     }
 
-    getPerimeter() {
-        return this.leftSide + this.rightSide + this.basicSide;
-    }
+    getPerimeter() { return this.a + this.b + this.c } //возврат периметра треугольника
 
     getArea() {
-        const hP = 0.5 * this.getPerimeter();
-        return parseFloat(Math.sqrt(hP * (hP - this.leftSide) * (hP - this.rightSide) * (hP - this.basicSide)).toFixed(3));
+        let p = this.getPerimeter() / 2; //полупериметр треугольника
+        let s = Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)); //формула Герона
+
+        return Number((s).toFixed(3)); // возврат площади треугольника, обрезка до третьего знака, преобразование в число
     }
-}
+
+};
 
 function getTriangle(a, b, c) {
     try {
-        return new Triangle(a, b, c);
+        return new Triangle(a, b, c); //проверка создания объекта Треугольник
     }
-    catch (err) {
-        const dummyTriangle = new Object();
-        dummyTriangle.getArea = function () { return "Ошибка! Треугольник не существует"; };
-        dummyTriangle.getPerimeter = function () { return "Ошибка! Треугольник не существует"; };
-        return dummyTriangle;
+    catch (err) { // вывод ошибки, в случ неудачной попытки создания объекта Треугольник
+        return {
+            getArea() {
+                return "Ошибка! Треугольник не существует";
+            },
+            getPerimeter() {
+                return "Ошибка! Треугольник не существует";
+            }
+        }
     }
-}
+};
+/* ПОЯСНЕНИЕ ПРЕПОДАВАТЕЛЯ: Суть замены объекта <в функции getTriangle> в том, что 
+предоставляется безопасный механизм для работы с объектом, 
+который может выбросить ошибку....Аналогично делению 0/0 возвращает NaN, значение как-бы 
+поломано, но ошибки не произошло. И это главное, что ошибки не произошло...У вас ситуация 
+аналогичная: если не получается создать объект, то необходимо хотя бы предоставить механизм 
+работы с этим значением. */
