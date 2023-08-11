@@ -38,8 +38,9 @@ return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)); //форму�
     }
 
 
-function getTriangle(a, b, c) {
-    try {
+    function 
+    getTriangle(a,b,c) {
+       try {
         return new Triangle(a, b, c);
     } catch (error) {
         return {
