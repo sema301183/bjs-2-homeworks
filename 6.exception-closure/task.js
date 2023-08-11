@@ -33,7 +33,7 @@ class Triangle {
 
      getArea() {
         const p = this.perimetr / 2;
-return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c)); //формула Герона
+     return +Math.sqrt(x: p * (p - this.a) * (p - this.b) * (p - this.c)).toFixed(fractionDigits: 3);
      }
     }
 
