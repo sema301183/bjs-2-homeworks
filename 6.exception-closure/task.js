@@ -27,11 +27,11 @@ class Triangle {
         this.c = c;
     }
 
-    get area() {
+    get perimeter() {
         return this.a + this.b + this.c;
     }
 
-    get perimeter() {
+    get area() {
         const p = this.perimeter / 2;
         return +Math.sqrt(p * (p - this.a) * (p - this.b) * (p - this.c));
     }
